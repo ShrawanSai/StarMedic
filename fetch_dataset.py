@@ -229,7 +229,6 @@ def get_random_disease():
                 "Neck stiffness"
             ],
             "major_tests_scan_results": [
-                "Neurological Exam: Normal findings",
                 "MRI: Rule out other conditions",
                 "CT Scan: Rule out other conditions",
                 "Blood Test: Normal findings (irrelevant)",

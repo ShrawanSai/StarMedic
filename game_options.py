@@ -40,7 +40,7 @@ class OptionsLLM:
     You can only ask for a physical examinations to be done and expect the report.
 
     IMPORTANT: If you are asking for a test to be done, you must explicitly ask the patient to get the test done and the purpose of the test in one sentence in a definitive manner.
-    Do not say: "Can you get a blood test done?" or "I think you should get a blood test done to check for WBCs." (This is not definitive)
+    DO NOT SAY: "Can you get a blood test done?" or "I think you should get a blood test done to check for WBCs." (This is not definitive)
     For example: "Please go get a blood test done to check for WBCs" (This is an attempt to find out additional symptoms that can help narrow down the disease)
 
     IMPORTANT: No Direct Revelations: Under no circumstances should you reveal the correct treatment plans, tests, or disease name yourself. 
@@ -50,7 +50,7 @@ class OptionsLLM:
     Detailed Requirements:
 
     Generate only one correct option (along with reason why it is correct) that helps the player make progress towards diagnosing the disease and suggesting treatment plans.
-    Generate three incorrect options (along with reason why it is incorrect) that attempt to confuse the player/doctor. The incorrect options can be of different domains from the correct option but must be completely incorrect.
+    Generate three incorrect options (along with reason why it is incorrect) that attempt to confuse the player/doctor. The incorrect options must be of different domains from the correct option but must be completely incorrect.
     Note: The incorrect options must not be a valid option in any way. They must be relevant to medicine but completely irrelevant to the actual disease or correct tratement plans so far.
     An incorrect options could be a question that is not relevant to the symptoms, a test that is not relevant to the symptoms, a treatment plan that is not relevant to the symptoms, etc.
     Generate only the correct option and the incorrect options. Nothing else

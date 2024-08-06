@@ -6,6 +6,7 @@ from actor import Actor
 from game_options import OptionsLLM
 from disease_reasoning import DiseaseReasoning
 from fetch_dataset import get_random_disease
+from fetch_patient import get_random_patient
 import random
 import streamlit as st
 import warnings
@@ -25,19 +26,21 @@ class SituationMaster:
       st.session_state.patient_name = patient_details["name"]
       st.session_state.patient_specie = patient_details["specie"]
       st.session_state.patient_description = patient_details["description"]
+      st.session_state.image_path = patient_details["image_path"]
 
       st.session_state.disease = disease
       (st.session_state.disease_name, st.session_state.symptoms, st.session_state.treatment_plan, st.session_state.major_tests_scan_results, st.session_state.other_info) = st.session_state.disease
       st.session_state.diesease_found = False
       st.session_state.score = 0
       st.session_state.attempts = 0
-      st.session_state.tps_found = 0
+      st.session_state.tps_found = []
 
     # Initate all initializations from the session state
     self.patient_details = st.session_state.patient_details
     self.patient_name = st.session_state.patient_name
     self.patient_specie = st.session_state.patient_specie
     self.patient_description = st.session_state.patient_description
+    self.image_path = st.session_state.image_path
     self.disease = st.session_state.disease
     self.disease_name = st.session_state.disease_name
     self.symptoms = st.session_state.symptoms
@@ -133,6 +136,10 @@ class SituationMaster:
     st.subheader("Your score: " + str(st.session_state.score))
     if st.session_state.diesease_found:
       st.subheader("Disease Found: " + self.disease_name)
+    if len(st.session_state.tps_found) > 0:
+        st.subheader("Treatment Plans Found:")
+        for tp in range(len(st.session_state.tps_found)):
+            st.write(f"{tp+1}: {st.session_state.tps_found[tp]}")
     if not st.session_state.initialized:
         st.session_state.initialized = True
         st.session_state.last_message = "Hello. What seems to be the problem?"
@@ -152,11 +159,11 @@ class SituationMaster:
                 st.session_state.diesease_found = True
                 st.session_state.score += 500
             if "FOUND TP" in st.session_state.dr_response:
-                st.session_state.tps_found += 1
+                st.session_state.tps_found.append(st.session_state.dr_response)
                 st.session_state.score += 100
             if st.session_state.diesease_found:
                 st.success("Disease Found!")
-            if st.session_state.tps_found >= 2 and st.session_state.diesease_found:
+            if len(st.session_state.tps_found) >= 3 and st.session_state.diesease_found:
                 st.success("Winner! You have found the disease and the treatment plans!")
             if st.session_state.score >1000:
                 st.success("Winner! You have found the disease and the treatment plans!")
@@ -204,6 +211,7 @@ class SituationMaster:
 
             # Clear radio button selection to allow for new options to be selected
             st.session_state.selected_option = None
+            st.session_state.dr_response = None
 
             # Rerun the app to refresh the state
             st.experimental_rerun()
@@ -217,84 +225,44 @@ class SituationMaster:
 
 
 
+# if __name__ == "__main__":
+
+#   # Example usage
+#   patient_details = get_random_patient()
+#   # print(random_patient)
+
+#   disease = get_random_disease()
+
+#   situation1 = SituationMaster(patient_details, disease)
+
+#   st.set_page_config(page_title="Medical Diagnosis Game")
+#   situation1.start_game_streamlit()
+def main():
+    menu = ["Introduction", "Patient Card", "Game"]
+    choice = st.sidebar.selectbox("Select Page", menu)
+    patient_details = get_random_patient()
+    # print(patient_details)
+    disease = get_random_disease()
+    game = SituationMaster(patient_details, disease)
+
+    if choice == "Introduction":
+        st.title("Welcome to StarMedic! The Star-Wars Medical Diagnosis Game!")
+        st.write("""
+            Embark on a thrilling journey through the Star Wars universe as a skilled medic. Your mission is to diagnose and treat patients from various species across the galaxy. Engage in interactive dialogues, ask probing questions, and choose the right options to uncover mysterious ailments.
+
+Earn points for accurate diagnoses and effective treatment plans. The more precise you are, the higher your score will soar.
+
+Are you ready to use your medical skills to save lives in a galaxy far, far away? Dive in and may the Force be with you!
+        """)
+    elif choice == "Patient Card":
+        st.title("Patient Card")
+        st.write("Here are the details of the current patient you need to diagnose:")
+        st.image(game.image_path, caption="Patient Image", use_column_width="auto")
+        st.subheader("Name: " + game.patient_name)
+        st.write(f"**Species:** {game.patient_specie}")
+        st.write(f"**Description:** {game.patient_description}")
+    elif choice == "Game":
+        game.start_game_streamlit()
+
 if __name__ == "__main__":
-
-
-  def get_random_patient():
-      patients = [
-          {
-              "name": "Elara Vendarian",
-              "specie": "Naboo",
-              "description": """Elara Vendarian, a Naboo from the Star Wars world, despite her impressive intellect and self-assured demeanor, is a challenging patient when it comes to medical visits. When visiting a doctor, she tends to overanalyze her symptoms, often diagnosing herself before the medical professionals have a chance. Her confidence can come across as dismissive or even condescending, as she believes she knows best about her own health.
-
-  When Elara is injured or in pain, her usually composed facade crumbles. She becomes extremely sensitive and vocal about her discomfort, frequently expressing her distress with dramatic flair. Small injuries feel catastrophic to her, and she doesn't hesitate to make her suffering known. Her pain tolerance is notably low, and she requires a great deal of reassurance and gentle handling from the medical staff.
-
-  During periods of depression, Elara's usual confidence is replaced with a profound sense of vulnerability. She becomes introspective and withdrawn, struggling with feelings of inadequacy and self-doubt. Her sharp mind turns against her, as she fixates on her perceived failures and weaknesses. In these moments, she needs compassionate care and patience, as her typical resilience is overshadowed by her emotional turmoil.
-
-  Overall, Elara's interactions with healthcare providers are marked by a mix of intellectual assertiveness and emotional fragility. Her high sensitivity to pain and tendency to vocalize her discomfort require a delicate balance of firm guidance and empathetic support from the medical team."""
-          },
-          {
-              "name": "Taryn Raeth",
-              "specie": "Corellian",
-              "description": """Taryn Raeth, a Corellian from the Star Wars universe, is a practical and straightforward individual. As a patient, Taryn is cooperative but has a tendency to downplay symptoms, often considering them trivial. This can lead to delayed diagnoses as he prefers to 'tough it out' rather than seek immediate medical attention.
-
-  When in pain, Taryn tries to maintain his composure and often uses humor as a coping mechanism. He has a moderate pain tolerance but is not overly expressive about his discomfort. He appreciates clear and direct communication from medical staff and values efficiency in his treatment.
-
-  During periods of depression, Taryn becomes unusually quiet and reserved, retreating into himself. He struggles with asking for help and tends to isolate himself. In these times, he benefits from a proactive approach by healthcare providers, who can offer consistent support and encouragement.
-
-  Overall, Taryn's interactions with healthcare providers are generally positive, as long as his tendency to minimize symptoms is addressed. He values professionalism and appreciates a no-nonsense approach to his care."""
-          },
-          {
-              "name": "Liora Melane",
-              "specie": "Alderaanian",
-              "description": """Liora Melane, hailing from Alderaan, carries the grace and poise typical of her people. However, she is also known for her meticulous nature and a strong preference for understanding every detail of her medical care. As a patient, Liora is highly engaged and asks numerous questions, seeking to be an active participant in her treatment plan.
-
-  In times of pain, Liora remains composed but is very precise about describing her symptoms. She has a high pain tolerance and prefers to endure discomfort silently rather than show vulnerability. She respects medical expertise but needs thorough explanations to feel comfortable with her care.
-
-  When depressed, Liora becomes withdrawn and can appear aloof. She internalizes her struggles and finds it hard to open up, even to those closest to her. Supportive and gentle coaxing is required from her healthcare team to help her express her feelings and accept help.
-
-  Liora's interactions with healthcare providers are marked by her desire for thorough understanding and clear communication. She appreciates a collaborative approach and values detailed, patient-centered care."""
-          },
-          {
-              "name": "Dax Tenor",
-              "specie": "Human",
-              "description": """Dax Tenor, a human from the bustling cityscape of Coruscant, is a dynamic and assertive individual. In medical settings, Dax can be impatient and demanding, often pushing for quick solutions and immediate results. His confidence sometimes borders on arrogance, making him a challenging patient for healthcare providers.
-
-  When in pain, Dax is very vocal and insistent on immediate relief. He has a low pain threshold and is not hesitant to express his discomfort. He prefers aggressive treatment options and quick fixes, often questioning and challenging medical advice.
-
-  During depressive episodes, Dax's usually vibrant personality dims significantly. He becomes irritable and withdrawn, struggling with feelings of frustration and helplessness. In these times, he needs a firm yet compassionate approach to help him navigate his emotions and engage in his treatment.
-
-  Dax's interactions with healthcare providers require a balance of assertiveness and empathy. He responds well to clear, decisive communication and appreciates a proactive approach to his care."""
-          },
-          {
-              "name": "Mira Talon",
-              "specie": "Togruta",
-              "description": """Mira Talon, a Togruta from the planet Shili, is a resilient and independent individual. In medical situations, Mira tends to be stoic and prefers to handle her discomfort privately. She has a high pain tolerance and rarely complains, even when experiencing significant symptoms.
-
-  When in pain, Mira remains calm and composed, often underreporting her level of discomfort. She values traditional healing methods and prefers natural remedies whenever possible. She respects medical professionals but is somewhat skeptical of invasive procedures and medications.
-
-  During periods of depression, Mira becomes introspective and seeks solitude. She struggles with expressing her emotions and can appear detached. She benefits from a patient and understanding approach, with healthcare providers who respect her need for space while offering consistent support.
-
-  Mira's interactions with healthcare providers are characterized by her preference for non-invasive treatments and her high level of independence. She appreciates a respectful and considerate approach to her care, with an emphasis on holistic and natural methods."""
-          }
-      ]
-
-      patient = random.choice(patients)
-      patient_details = {
-          "name": patient["name"],
-          "specie": patient["specie"],
-          "description": patient["description"]
-      }
-
-      return patient_details
-
-  # Example usage
-  patient_details = get_random_patient()
-  # print(random_patient)
-
-  disease = get_random_disease()
-
-  situation1 = SituationMaster(patient_details, disease)
-
-  st.set_page_config(page_title="Medical Diagnosis Game")
-  situation1.start_game_streamlit()
+    main()
