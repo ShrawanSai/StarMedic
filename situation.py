@@ -154,11 +154,12 @@ class SituationMaster:
     col1, col2, col3 = st.columns([2, 0.1, 3])
 
     with col1:
-        if st.session_state.dr_response:
-            if "FOUND DISEASE" in st.session_state.dr_response:
+        print(st.session_state.dr_response)
+        if st.session_state.dr_response is not None:
+            if "FOUND DISEASE" in st.session_state.dr_response.upper():
                 st.session_state.diesease_found = True
                 st.session_state.score += 500
-            if "FOUND TP" in st.session_state.dr_response:
+            if "FOUND TP" in st.session_state.dr_response.upper():
                 st.session_state.tps_found.append(st.session_state.dr_response)
                 st.session_state.score += 100
             if st.session_state.diesease_found:
