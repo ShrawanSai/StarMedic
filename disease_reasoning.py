@@ -67,6 +67,11 @@ class DiseaseReasoning:
     Response:
     "TEST RESULT: The prescribed blood tests shows no signs of anything concerning and are problem-free."
 
+    Player: "I think you should get a urine test done to check for ketone"
+
+    Response:
+    "TEST RESULT: The urine test results show no signs of ketones and are problem-free."
+    
     Player: "Is there anything else I should know?"
 
     Response:
