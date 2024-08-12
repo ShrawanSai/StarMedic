@@ -91,6 +91,7 @@ class SituationMaster:
     drllm_response = self.drllm.ask(message)
     time.sleep(1)
     actorllm_response, dr_response = self.actorllm.talk(drllm_response)
+    print(actorllm_response, dr_response)
     return actorllm_response, dr_response
 
   def clean_text(self, input_string):
@@ -144,6 +145,8 @@ class SituationMaster:
         st.session_state.initialized = True
         st.session_state.last_message = "Hello. What seems to be the problem?"
         st.session_state.response, st.session_state.dr_response = self.patient_says(st.session_state.last_message)
+        st.session_state.old_response = None
+        # print(st.session_state.dr_response)
         choices = self.optionsllm.ask(st.session_state.response, self.drllm.get_history())
         st.session_state.randomized_options, st.session_state.correct_answer_reasoning, st.session_state.incorrect_answers_mappings = self.extract_option_reasoning(choices)
         st.session_state.conversation_history.append(f"<span style='color:blue;'><strong>You:</strong> 🩺 : {st.session_state.last_message}</span>")
@@ -154,13 +157,15 @@ class SituationMaster:
     col1, col2, col3 = st.columns([2, 0.1, 3])
 
     with col1:
-        print(st.session_state.dr_response)
-        if st.session_state.dr_response is not None:
-            if "FOUND DISEASE" in st.session_state.dr_response.upper():
+        # print(st.session_state.old_response)
+        if st.session_state.old_response is not None:
+            st.markdown(f"<span style='background-color:lightgray; color:black;'><strong>{st.session_state.old_response}</strong></span>", unsafe_allow_html=True)
+        if st.session_state.old_response is not None:
+            if "FOUND DISEASE" in st.session_state.old_response.upper():
                 st.session_state.diesease_found = True
                 st.session_state.score += 500
-            if "FOUND TP" in st.session_state.dr_response.upper():
-                st.session_state.tps_found.append(st.session_state.dr_response)
+            if "FOUND TP" in st.session_state.old_response.upper():
+                st.session_state.tps_found.append(st.session_state.old_response)
                 st.session_state.score += 100
             if st.session_state.diesease_found:
                 st.success("Disease Found!")
@@ -168,14 +173,15 @@ class SituationMaster:
                 st.success("Winner! You have found the disease and the treatment plans!")
             if st.session_state.score >1000:
                 st.success("Winner! You have found the disease and the treatment plans!")
-        st.markdown(f"<span style='background-color:lightgray; color:black;'><strong>{st.session_state.dr_response}</strong></span>", unsafe_allow_html=True)
+        # st.markdown(f"<span style='background-color:lightgray; color:black;'><strong>{st.session_state.old_response}</strong></span>", unsafe_allow_html=True)
         st.markdown(f"<span style='color:green;'><strong>Patient:</strong> 🤒 : {st.session_state.response}</span>", unsafe_allow_html=True)
+        st.session_state.old_response = None
 
         selected_option = st.radio("Choose your response:", st.session_state.randomized_options, key='options_radio')
 
         if st.button("Submit", key='submit_button'):
             input_message = selected_option
-            st.markdown(f"<span style='background-color:lightgray; color:black;'><strong>{st.session_state.dr_response}</strong></span>", unsafe_allow_html=True)
+            # st.markdown(f"<span style='background-color:lightgray; color:black;'><strong>{st.session_state.dr_response}</strong></span>", unsafe_allow_html=True)
             st.markdown(f"<span style='color:blue;'><strong>You:</strong> 🩺 : {input_message}</span>", unsafe_allow_html=True)
 
             if input_message in st.session_state.correct_answer_reasoning:
@@ -210,12 +216,14 @@ class SituationMaster:
             if st.session_state.dr_response:
                 st.markdown(f"<span style='background-color:lightgray; color:black;'><strong>{st.session_state.dr_response}</strong></span>", unsafe_allow_html=True)
                 st.session_state.conversation_history.append(f"<span style='background-color:lightgray; color:black;'><strong>{st.session_state.dr_response}</strong></span>")
-                print(st.session_state.dr_response)
+                # print(st.session_state.dr_response)
+                st.session_state.old_response = st.session_state.dr_response
             st.session_state.conversation_history.append(f"<span style='color:green;'><strong>Patient:</strong> 🤒 : {st.session_state.response}</span>")
 
             # Clear radio button selection to allow for new options to be selected
             st.session_state.selected_option = None
             st.session_state.dr_response = None
+            
 
             # Rerun the app to refresh the state
             st.experimental_rerun()

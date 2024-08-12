@@ -41,7 +41,7 @@ class OptionsLLM:
 
     IMPORTANT: If you are asking for a test to be done, you must explicitly ask the patient to get the test done and the purpose of the test in one sentence in a definitive manner.
     DO NOT SAY: "Can you get a blood test done?" or "I think you should get a blood test done to check for WBCs." (This is not definitive)
-    For example: "Please go get a blood test done to check for WBCs" (This is an attempt to find out additional symptoms that can help narrow down the disease)
+    For example: "Please go get a blood test done to check for WBCs" (This is to check for WBCs)
 
     IMPORTANT: No Direct Revelations: Under no circumstances should you reveal the correct treatment plans, tests, or disease name yourself. 
     Even in the reasonings, you must not reveal it. You may confirm these only if the player/doctor mentions them in their question or has already discovered them in the contextt of the game so far.

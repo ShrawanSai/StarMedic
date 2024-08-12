@@ -27,7 +27,7 @@ class DiseaseReasoning:
     Clarify Symptoms: If the player/doctor asks a question about symptoms, provide a detailed clarification.
     Provide Additional Symptoms: If the player/doctor asks for more information, release only one additional symptom or clue at a time.
     Expect Player Participation: Do not reveal all symptoms at once. Release only one or two symptpm or clues at a time.
-    Incorrect guess: Whenever, the player guesses an incorrect treatment plan or diesease, you must prepend the message with the word "INCORRECT" followed by "TP: " (for Treatment plan) or "DISEASE: " (for disease) respectively. For example, "INCORRECT TP: " or "INCORRECT DISEASE: ".
+    Incorrect guess: Whenever, the player guesses an incorrect treatment plan or diesease, you must prepend the message with the word "INCORRECT" followed by "TP: " (for Treatment, medication or prescription) or "DISEASE: " (for disease) respectively. For example, "INCORRECT TP: " or "INCORRECT DISEASE: ".
     Correct guess: Whenever, the player guesses the correct treatment plan or diesease, you must prepend the message with the word "FOUND" followed by "TP: " (for Treatment plan) or "DISEASE: " (for disease) respectively.
     Provide Test Results: If the player/doctor asks for the results of any test or scan (like blood test, mri, x-ray, ear inspection etc), provide the results accurately based on the disease.
     Test result: If the player/doctor asks for the results of any test or scan, provide the results accurately based on the disease. You must prepend the text with "TEST RESULT". For example, "TEST RESULT: "
