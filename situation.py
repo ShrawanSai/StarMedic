@@ -168,13 +168,14 @@ class SituationMaster:
                 st.success("Winner! You have found the disease and the treatment plans!")
             if st.session_state.score >1000:
                 st.success("Winner! You have found the disease and the treatment plans!")
-            st.markdown(f"<span style='background-color:lightgray; color:black;'><strong>{st.session_state.dr_response}</strong></span>", unsafe_allow_html=True)
+        st.markdown(f"<span style='background-color:lightgray; color:black;'><strong>{st.session_state.dr_response}</strong></span>", unsafe_allow_html=True)
         st.markdown(f"<span style='color:green;'><strong>Patient:</strong> 🤒 : {st.session_state.response}</span>", unsafe_allow_html=True)
 
         selected_option = st.radio("Choose your response:", st.session_state.randomized_options, key='options_radio')
 
         if st.button("Submit", key='submit_button'):
             input_message = selected_option
+            st.markdown(f"<span style='background-color:lightgray; color:black;'><strong>{st.session_state.dr_response}</strong></span>", unsafe_allow_html=True)
             st.markdown(f"<span style='color:blue;'><strong>You:</strong> 🩺 : {input_message}</span>", unsafe_allow_html=True)
 
             if input_message in st.session_state.correct_answer_reasoning:
@@ -207,7 +208,9 @@ class SituationMaster:
 
             # Update conversation history with the patient's new response
             if st.session_state.dr_response:
+                st.markdown(f"<span style='background-color:lightgray; color:black;'><strong>{st.session_state.dr_response}</strong></span>", unsafe_allow_html=True)
                 st.session_state.conversation_history.append(f"<span style='background-color:lightgray; color:black;'><strong>{st.session_state.dr_response}</strong></span>")
+                print(st.session_state.dr_response)
             st.session_state.conversation_history.append(f"<span style='color:green;'><strong>Patient:</strong> 🤒 : {st.session_state.response}</span>")
 
             # Clear radio button selection to allow for new options to be selected
