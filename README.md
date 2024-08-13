@@ -9,6 +9,16 @@
 
 <p id="description">Embark on a thrilling journey through the Star Wars universe as a skilled medic. Your mission is to diagnose and treat patients from various species across the galaxy. Engage in interactive dialogues ask probing questions and choose the right options to uncover mysterious ailments. Earn points for accurate diagnoses and effective treatment plans. The more precise you are the higher your score will soar. Are you ready to use your medical skills to save lives in a galaxy far far away? Dive in and may the Force be with you!</p>
 
+## 📑 Table of Contents
+
+1. [Demo](#-demo)
+2. [Project Screenshots](#project-screenshots)
+3. [Features](#-features)
+4. [Installation Steps](#%EF%B8%8F-installation-steps)
+5. [How It Works](#-how-it-works)
+6. [Built with](#-built-with)
+
+
 <h2>🚀 Demo</h2>
 
 1. [Streamlit Live link](https://starmedic.streamlit.app/)
@@ -61,6 +71,11 @@ streamlit run situation.py
 
 ## 🧩 How It Works
 
+<p align="center">
+  <img src="https://github.com/ShrawanSai/StarMedic/blob/main/MedicalGame.drawio.png" alt="UML Diagram" width="800">
+</p>
+
+
 StarMedic is built around an interactive gameplay loop where players diagnose and treat patients from various species in the Star Wars universe. The game is structured as follows:
 
 1. **Random Patient Selection**: A patient with a randomly generated disease and symptoms is selected from the database.
@@ -81,9 +96,6 @@ StarMedic is built around an interactive gameplay loop where players diagnose an
 5. **Scoring**:
    - Points are awarded based on the accuracy and efficiency of the player's decisions, encouraging them to hone their diagnostic skills.
 
-<p align="center">
-  <img src="https://github.com/ShrawanSai/StarMedic/blob/main/MedicalGame.drawio.png" alt="UML Diagram" width="800">
-</p>
 
   
   
