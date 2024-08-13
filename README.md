@@ -1,8 +1,8 @@
 <h1 align="center" id="title">StarMedic</h1>
+<img src="https://github.com/ShrawanSai/StarMedic/blob/main/screenshots/logo.jpg" alt="project-screenshot" width="200" height="200/">
 
 <p align="center"><img src="https://socialify.git.ci/ShrawanSai/StarMedic/image?description=1&amp;descriptionEditable=The%20Star%20Wars%20Medical%20Diagnosis%20Game!&amp;font=Raleway&amp;language=1&amp;name=1&amp;owner=1&amp;pattern=Diagonal%20Stripes&amp;stargazers=1&amp;theme=Dark" alt="project-image"></p>
 
-<img src="https://github.com/ShrawanSai/StarMedic/blob/main/screenshots/logo.jpg" alt="project-screenshot" width="100" height="100/">
 
 <p id="description">Embark on a thrilling journey through the Star Wars universe as a skilled medic. Your mission is to diagnose and treat patients from various species across the galaxy. Engage in interactive dialogues ask probing questions and choose the right options to uncover mysterious ailments. Earn points for accurate diagnoses and effective treatment plans. The more precise you are the higher your score will soar. Are you ready to use your medical skills to save lives in a galaxy far far away? Dive in and may the Force be with you!</p>
 
