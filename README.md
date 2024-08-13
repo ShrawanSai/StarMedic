@@ -8,8 +8,8 @@
 
 <h2>🚀 Demo</h2>
 
-[Streamlit Live link](https://starmedic.streamlit.app/)
-[Youtube Video](https://www.youtube.com/watch?v=R_4jrGhQ7Yo&t=3s)
+1. [Streamlit Live link](https://starmedic.streamlit.app/)
+2. [Youtube Video](https://www.youtube.com/watch?v=R_4jrGhQ7Yo&t=3s)
 
 
 <h2>🧐 Features</h2>
