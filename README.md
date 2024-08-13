@@ -81,7 +81,9 @@ StarMedic is built around an interactive gameplay loop where players diagnose an
 5. **Scoring**:
    - Points are awarded based on the accuracy and efficiency of the player's decisions, encouraging them to hone their diagnostic skills.
 
-[View the UML Diagram](https://github.com/ShrawanSai/StarMedic/blob/main/MedicalGame.drawio.png) for a detailed visual representation of the game's flow.
+<p align="center">
+  <img src="https://github.com/ShrawanSai/StarMedic/blob/main/MedicalGame.drawio.png" alt="UML Diagram" width="800">
+</p>
 
   
   
