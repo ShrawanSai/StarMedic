@@ -12,11 +12,10 @@
 ## 📑 Table of Contents
 
 1. [Demo](#-demo)
-2. [Project Screenshots](#project-screenshots)
-3. [Features](#-features)
-4. [Installation Steps](#%EF%B8%8F-installation-steps)
-5. [How It Works](#-how-it-works)
-6. [Built with](#-built-with)
+2. [Features](#-features)
+3. [Installation Steps](#%EF%B8%8F-installation-steps)
+4. [How It Works](#-how-it-works)
+5. [Built with](#-built-with)
 
 
 <h2>🚀 Demo</h2>
