@@ -1,5 +1,8 @@
 <h1 align="center" id="title">StarMedic</h1>
-<img src="https://github.com/ShrawanSai/StarMedic/blob/main/screenshots/logo.jpg" alt="project-screenshot" width="200" height="200/">
+<p align="center">
+  <img src="https://github.com/ShrawanSai/StarMedic/blob/main/screenshots/logo.jpg" alt="project-screenshot" width="200" height="200">
+</p>
+
 
 <p align="center"><img src="https://socialify.git.ci/ShrawanSai/StarMedic/image?description=1&amp;descriptionEditable=The%20Star%20Wars%20Medical%20Diagnosis%20Game!&amp;font=Raleway&amp;language=1&amp;name=1&amp;owner=1&amp;pattern=Diagonal%20Stripes&amp;stargazers=1&amp;theme=Dark" alt="project-image"></p>
 
@@ -54,6 +57,31 @@ GOOGLE_API_KEY = YOUR-API-KEY
 ```
 streamlit run situation.py
 ```
+
+
+## 🧩 How It Works
+
+StarMedic is built around an interactive gameplay loop where players diagnose and treat patients from various species in the Star Wars universe. The game is structured as follows:
+
+1. **Random Patient Selection**: A patient with a randomly generated disease and symptoms is selected from the database.
+  
+2. **Dialogue and Decision-Making**: 
+   - The Situation LLM creates the context and sets the scene by reviewing patient information.
+   - The Actor LLM takes the role of a character within the game, engaging the player in dialogue.
+   - Players can ask questions, suggest tests, or directly make a diagnosis by selecting from multiple options.
+  
+3. **Processing and Feedback**:
+   - The Disease Reasoning LLM interprets the player's inputs, checks if they correspond to symptoms, and offers clarifications or test results.
+   - If the player selects a correct diagnosis, the game proceeds to provide positive feedback; if incorrect, hints are given to guide them toward the right diagnosis.
+   - The Options LLM dynamically generates and presents new choices based on the context of the game.
+
+4. **Game Continuation**:
+   - Players continue making decisions and engaging in dialogues until they correctly diagnose the patient's condition or the game ends.
+  
+5. **Scoring**:
+   - Points are awarded based on the accuracy and efficiency of the player's decisions, encouraging them to hone their diagnostic skills.
+
+[View the UML Diagram](https://github.com/ShrawanSai/StarMedic/blob/main/MedicalGame.drawio.png) for a detailed visual representation of the game's flow.
 
   
   
